@@ -49,13 +49,13 @@ public class TokenService {
     /**
      * Annotation 방식
      */
-    @Retryable(value = {UpdateFailException.class}, maxAttempts = 2, backoff = @Backoff(delay = 1000))
+    @Retryable(value = {UpdateFailException.class}, maxAttempts = 2, backoff = @Backoff(delay = 300))
     public Token update(Token token, String tokenValue) {
         log.info("call token update method..");
         return tokenRepository.update(token, tokenValue);
     }
 
-    @Retryable(value = {UpdateFailException.class}, maxAttempts = 2, backoff = @Backoff(delay = 1000))
+    @Retryable(value = {UpdateFailException.class}, maxAttempts = 2, backoff = @Backoff(delay = 300))
     public Token updateFail(Token token, String tokenValue) {
         log.info("call token updateFail method..");
         return tokenRepository.updateThrowException(token, tokenValue);

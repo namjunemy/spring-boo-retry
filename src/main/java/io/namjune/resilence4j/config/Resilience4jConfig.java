@@ -20,7 +20,7 @@ public class Resilience4jConfig {
             // 최대 시도 횟수
             .maxAttempts(3)
             // 실패시 wait 시간
-            .waitDuration(Duration.ofSeconds(1))
+            .waitDuration(Duration.ofMillis(300))
             // 재시도 결정 Predicate
             .retryOnResult(retryOn -> retryFlag == retryOn)
             // 재시도 대상 Exceptions

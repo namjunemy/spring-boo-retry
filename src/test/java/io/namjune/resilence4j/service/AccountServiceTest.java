@@ -3,6 +3,7 @@ package io.namjune.resilence4j.service;
 import io.namjune.ServiceTestContext;
 import io.namjune.common.Account;
 import io.namjune.common.exception.SaveFailException;
+import io.namjune.common.exception.UpdateFailException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -30,6 +31,14 @@ class AccountServiceTest extends ServiceTestContext {
     void saveAccountFail() {
         assertThrows(SaveFailException.class, () -> {
             accountService.saveFail(Account.builder().build());
+        });
+    }
+
+    @Test
+    @DisplayName("Account 업데이트 실패")
+    void updateAccountFail() {
+        assertThrows(UpdateFailException.class, () -> {
+            accountService.update(Account.builder().build(), "updateName");
         });
     }
 }

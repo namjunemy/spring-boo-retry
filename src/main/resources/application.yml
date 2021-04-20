@@ -1,1 +1,10 @@
-
+resilience4j:
+  retry:
+    instances:
+      accountUpdate:
+        maxRetryAttempts: 4
+        waitDuration: 300
+        retryExceptions:
+          - io.namjune.common.exception.UpdateFailException
+        ignoreExceptions:
+          - java.io.IOException
