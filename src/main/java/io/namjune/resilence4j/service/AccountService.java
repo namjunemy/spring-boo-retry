@@ -39,4 +39,19 @@ public class AccountService {
 
         return result.get();
     }
+
+    public Account saveFail(Account account) {
+        Supplier<Account> accountSupplier = Retry.decorateSupplier(accountSaveRetry, () -> {
+            log.info("call account saveFail method..");
+            return accountRepository.saveFail(account);
+        });
+
+        Try<Account> result = Try.ofSupplier(accountSupplier)
+            .recover(e -> {
+                log.error("call account saveFail fail recover. save fail");
+                throw new SaveFailException();
+            });
+
+        return result.get();
+    }
 }

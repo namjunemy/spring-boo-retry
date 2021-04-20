@@ -57,7 +57,7 @@ public class TokenService {
 
     @Retryable(value = {UpdateFailException.class}, maxAttempts = 2, backoff = @Backoff(delay = 1000))
     public Token updateFail(Token token, String tokenValue) {
-        log.info("call token update method..");
+        log.info("call token updateFail method..");
         return tokenRepository.updateThrowException(token, tokenValue);
     }
 

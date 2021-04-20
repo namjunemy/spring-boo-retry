@@ -12,6 +12,10 @@ import org.springframework.stereotype.Repository;
 public class AccountRepository {
 
     public Account save(Account account) {
+        return account;
+    }
+
+    public Account saveFail(Account account) {
         throw new SaveFailException();
     }
 }
