@@ -1,8 +1,8 @@
 package io.namjune.springretry.repository;
 
 import io.namjune.common.Token;
-import io.namjune.springretry.exception.SaveTokenFailException;
-import io.namjune.springretry.exception.UpdateTokenFailException;
+import io.namjune.common.exception.SaveFailException;
+import io.namjune.common.exception.UpdateFailException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 public class TokenRepository {
 
     public Token save(Token token) {
-        throw new SaveTokenFailException();
+        throw new SaveFailException();
     }
 
     public Token update(Token token, String tokenValue) {
@@ -22,6 +22,6 @@ public class TokenRepository {
     }
 
     public Token updateThrowException(Token token, String tokenValue) {
-        throw new UpdateTokenFailException();
+        throw new UpdateFailException();
     }
 }

@@ -1,43 +1,35 @@
 package io.namjune.springretry.service;
 
+import io.namjune.ServiceTestContext;
 import io.namjune.common.Token;
-import io.namjune.springretry.exception.SaveTokenFailException;
-import io.namjune.springretry.exception.UpdateTokenFailException;
+import io.namjune.common.exception.SaveFailException;
+import io.namjune.common.exception.UpdateFailException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
-class TokenServiceTest {
-
-    @Autowired
-    private TokenService tokenService;
+class TokenServiceTest extends ServiceTestContext {
 
     @Test
-    @DisplayName("토큰 저장시 재시도 3회")
-    void saveToken() {
-        assertThrows(SaveTokenFailException.class, () -> {
+    @DisplayName("토큰 저장 실패 - 재시도 3회")
+    void saveTokenFail() {
+        assertThrows(SaveFailException.class, () -> {
             tokenService.save(Token.builder().id(1).value("code").build());
         });
     }
 
     @Test
-    @DisplayName("토큰 업데이트시 재시도 2회")
+    @DisplayName("토큰 업데이트 실패 - 재시도 2회")
     void updateTokenFail() {
-        assertThrows(UpdateTokenFailException.class, () -> {
+        assertThrows(UpdateFailException.class, () -> {
             tokenService.updateFail(null, "updateTokenValue");
         });
     }
 
     @Test
-    @DisplayName("토큰 업데이트시 재시도 없이 성공")
+    @DisplayName("토큰 업데이트 성공 - 재시도 없음")
     void updateToken() {
         Token token = Token.builder()
             .id(1)

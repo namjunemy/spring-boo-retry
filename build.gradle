@@ -19,9 +19,15 @@ repositories {
 }
 
 dependencies {
+    // spring retry & resilience4j
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+
     // spring retry
     implementation 'org.springframework.retry:spring-retry:1.2.5.RELEASE'
-    implementation 'org.springframework:spring-aspects:5.2.8.RELEASE'
+
+    // resilience4j
+    implementation "io.github.resilience4j:resilience4j-spring-boot2:1.7.0"
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
